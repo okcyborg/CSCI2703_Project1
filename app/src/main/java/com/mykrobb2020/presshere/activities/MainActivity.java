@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         //some changes here
         //other changes here
         //a third change here
+        //a fourth change here
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
