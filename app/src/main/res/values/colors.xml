@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_gray">#e3e3e3</color>
+    <color name="colored_pressed_button">#0b4373</color>
+    <color name="colored_focused_button">#124e81</color>
+    <color name="colored_button_color">#19588f</color>
+    <color name="pressed_button">#bbbbbb</color>
+    <color name="focused_button">#d9d9d9</color>
+    <color name="button_color">#cccccc</color>
+
+    <color name="main_background">#fafafa</color>
+    <!--<color name="main_background">#277eca</color>-->
+    <!--<color name="main_background">#4795d8</color>-->
+    <color name="main_background2">#4499c0</color>
+    <color name="main_transition_color">#4795d8</color>
+    <color name="main_text_color">#555555</color>
+
+    <color name="action_bar_background">#4795d8</color>
+    <color name="action_bar_background_old">#4499c0</color>
+    <color name="action_bar_text">#ffffff</color>
+
+    <color name="account_background">#eeeeee</color>
+    <color name="account_edit_field_background">#ffffff</color>
+    <color name="user_auth_background">#4795d8</color>
+    <color name="user_auth_background_old">#4499c0</color>
+
+    <color name="circle_base">#19588f</color>
+    <color name="circle_fill">#e8c522</color>
+
+</resources>
