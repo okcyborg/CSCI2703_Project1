@@ -115,10 +115,11 @@ public class SurveyActivity extends AppCompatActivity {
                 public void done(ParseException e) {
                 mProgressBar.setVisibility(View.GONE);
                 if (e == null) {
-                    Intent intent = new Intent(SurveyActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+//                    Intent intent = new Intent(SurveyActivity.this, MainActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(intent);
+                    setContentView(R.layout.activity_survey2);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SurveyActivity.this);
                     builder.setMessage(e.getMessage());
