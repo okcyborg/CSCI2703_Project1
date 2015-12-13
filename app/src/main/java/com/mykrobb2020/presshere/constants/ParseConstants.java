@@ -15,4 +15,6 @@ public class ParseConstants {
     public static final String KEY_EMAIL = "email";
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_STRESS_LEVEL = "stressLevel";
+    public static final String KEY_CONTROL_USER = "controlUser";
+    public static final String KEY_SURVEY_ELIGIBLE = "surveyEligible";
 }
