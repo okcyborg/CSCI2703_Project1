@@ -17,4 +17,6 @@ public class ParseConstants {
     public static final String KEY_STRESS_LEVEL = "stressLevel";
     public static final String KEY_CONTROL_USER = "controlUser";
     public static final String KEY_SURVEY_ELIGIBLE = "surveyEligible";
+    public static final String KEY_TIME_ELAPSED = "timeElapsed";
+    public static final String KEY_HOLD_COMPLETED = "holdCompleted";
 }

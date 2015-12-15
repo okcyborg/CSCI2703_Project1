@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 toggleTextViewVisiblity();
                 ((MyView) view).startDrawingArc();
             } else if (MotionEvent.ACTION_UP == motionEvent.getActionMasked()) {
+                recordHoldCompletion();
                 ((MyView) view).stopDrawingArc();
             }
         }
-//      startColorAnimation(2000);
 
         return true;
         }
@@ -68,20 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //some changes here
-        //other changes here
-        //a third change here
-        //a fourth change here
-        //a fifth change here
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        navigateToSurvey();
-
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
             navigateToLogin();
+        } else if (currentUser.getBoolean(ParseConstants.KEY_SURVEY_ELIGIBLE)) {
+            navigateToSurvey();
+        } else if (currentUser.getBoolean(ParseConstants.KEY_CONTROL_USER)) {
+            setContentView(R.layout.message_layout);
+            ((TextView)findViewById(R.id.messageTextView)).setText("Nothing to do at this point");
         }
 
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -178,9 +176,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void recordHoldCompletion() {
+        float duration = lengthOfTime * 60.0f;
+        float timeElapsed = performingCompletionSteps ? lengthOfTime * 60.0f : mCircleView.getTimeElapsed()/1000.0f;
         final ParseObject holdEvent = new ParseObject(ParseConstants.CLASS_HOLD_EVENT);
-        holdEvent.put(ParseConstants.KEY_DURATION, lengthOfTime);
+
+        holdEvent.put(ParseConstants.KEY_DURATION, duration);
         holdEvent.put(ParseConstants.KEY_USER_ID, mCurrentUser.getObjectId());
+        holdEvent.put(ParseConstants.KEY_HOLD_COMPLETED, performingCompletionSteps);
+        holdEvent.put(ParseConstants.KEY_TIME_ELAPSED, timeElapsed);
+
         holdEvent.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

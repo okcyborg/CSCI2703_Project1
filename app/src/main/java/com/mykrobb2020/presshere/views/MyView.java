@@ -12,13 +12,14 @@ import android.view.View;
 import com.mykrobb2020.presshere.R;
 import com.mykrobb2020.presshere.activities.MainActivity;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Mike on 9/16/2015.
  */
 public class MyView extends View {
 
     private ArcCoordinates mArcCoordinates;
-    private boolean continueDrawing;
     private boolean resettingCircle;
     private int centerX;
     private int centerY;
@@ -29,10 +30,14 @@ public class MyView extends View {
     private Runnable clockwiseArcAnimator = new Runnable() {
         @Override
         public void run() {
+            if (timeElapsed >= 14960) {
+                int x = 1;
+                x+= 9;
+            }
             mArcCoordinates.increment();
+            timeElapsed+=40f;
             boolean needNewFrame = mArcCoordinates.getArcCoordinate() < ArcCoordinates.MAX_COORDINATE;
             if (needNewFrame) {
-                timeElapsed+=40f;
                 postDelayed(this, 40);
             } else {
                 ((MainActivity)getContext()).performPostHoldCompletionSteps();
@@ -103,7 +108,7 @@ public class MyView extends View {
             final RectF oval = new RectF();
             paint.setStyle(Paint.Style.STROKE);
             oval.set(25, 25, getWidth() - 25, getHeight() - 25);
-            canvas.drawArc(oval, 270, mArcCoordinates.getArcCoordinate(), false, paint);
+            canvas.drawArc(oval, 270, (float)mArcCoordinates.getArcCoordinate(), false, paint);
         }
     }
 
@@ -123,9 +128,9 @@ public class MyView extends View {
 
         if (mArcCoordinates != null) {
             paint.setColor(ContextCompat.getColor(getContext(), R.color.circle_fill));
-            canvas.drawArc(oval, 270, mArcCoordinates.getArcCoordinate(), false, paint);
-            secondStartAngle = 270.0f + mArcCoordinates.getArcCoordinate();
-            secondSweep = 360.0f - mArcCoordinates.getArcCoordinate();
+            canvas.drawArc(oval, 270, (float)mArcCoordinates.getArcCoordinate(), false, paint);
+            secondStartAngle = 270.0f + (float)mArcCoordinates.getArcCoordinate();
+            secondSweep = 360.0f - (float)mArcCoordinates.getArcCoordinate();
         }
 
         paint.setColor(ContextCompat.getColor(getContext(), R.color.circle_base));
@@ -133,30 +138,28 @@ public class MyView extends View {
     }
 
     public void startDrawingArc() {
-        continueDrawing = true;
-//        arcIncrement = 5;
+        timeElapsed = 0f;
         arcIncrement = 360.f/((lengthOfTime * 60 * 1000)/40);
+
         mArcCoordinates = new ArcCoordinates();
         removeCallbacks(clockwiseArcAnimator);
-        post(clockwiseArcAnimator);
+        postDelayed(clockwiseArcAnimator, 40);
         ((MainActivity)getContext()).startColorAnimation((long) (lengthOfTime * 60 * 1000));
     }
 
     public void stopDrawingArc() {
-        continueDrawing = false;
         resettingCircle = true;
         removeCallbacks(clockwiseArcAnimator);
-        post(counterClockwiseArcAnimator);
+        postDelayed(counterClockwiseArcAnimator, 40);
         ((MainActivity)getContext()).startColorAnimation((long) (mArcCoordinates.getArcCoordinate()/8) * 8);
-//        ((MainActivity)getContext()).resetColorAnimator();
-    }
-
-    public void setContinueDrawing(boolean continueDrawing) {
-        this.continueDrawing = continueDrawing;
     }
 
     public boolean isResettingCircle() {
         return resettingCircle;
+    }
+
+    public float getTimeElapsed() {
+        return timeElapsed;
     }
 
     public void setLengthOfTime(float lengthOfTime) {
@@ -164,7 +167,7 @@ public class MyView extends View {
     }
 
     public class ArcCoordinates {
-        private float arcCoordinate;
+        private double arcCoordinate;
         public static final int MAX_COORDINATE = 360;
 
         public void setArcCoordinate(float arcCoordinate) {
@@ -172,7 +175,7 @@ public class MyView extends View {
         }
 
         public void increment() {
-            if (arcCoordinate < MAX_COORDINATE - arcIncrement) {
+            if (arcIncrement < MAX_COORDINATE - arcCoordinate) {
                 arcCoordinate += arcIncrement;
             } else {
                 arcCoordinate = MAX_COORDINATE;
@@ -186,7 +189,7 @@ public class MyView extends View {
             }
         }
 
-        public float getArcCoordinate() {
+        public double getArcCoordinate() {
             return arcCoordinate;
         }
     }

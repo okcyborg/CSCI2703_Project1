@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="lengthOfTimeLabels">
-        <item>10 seconds</item>
         <item>15 seconds</item>
         <item>30 seconds</item>
         <item>45 seconds</item>
@@ -9,7 +8,6 @@
     </string-array>
 
     <string-array name="lengthOfTimeValues">
-        <item>0.16</item>
         <item>0.25</item>
         <item>0.5</item>
         <item>0.75</item>

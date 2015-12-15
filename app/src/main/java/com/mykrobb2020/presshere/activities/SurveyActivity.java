@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mykrobb2020.presshere.PressHereApplication;
 import com.mykrobb2020.presshere.R;
@@ -115,11 +117,18 @@ public class SurveyActivity extends AppCompatActivity {
                 public void done(ParseException e) {
                 mProgressBar.setVisibility(View.GONE);
                 if (e == null) {
-//                    Intent intent = new Intent(SurveyActivity.this, MainActivity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
-                    setContentView(R.layout.activity_survey2);
+                    currentUser.put(ParseConstants.KEY_SURVEY_ELIGIBLE, false);
+                    currentUser.saveInBackground();
+                    if (currentUser.getBoolean(ParseConstants.KEY_CONTROL_USER)) {
+                        setContentView(R.layout.message_layout);
+                        ((TextView)findViewById(R.id.messageTextView)).setText("Your survey has been submitted, nothing more to do");
+                    } else {
+                        Toast.makeText(getBaseContext(), "Survey submitted", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SurveyActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SurveyActivity.this);
                     builder.setMessage(e.getMessage());
