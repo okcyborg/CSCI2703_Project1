@@ -55,7 +55,7 @@ public class EditLoginInformation extends AppCompatActivity {
 
         if (username.isEmpty() || (password.isEmpty() ^ passwordReentry.isEmpty()) || email.isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.signup_error_message);
+            builder.setMessage(R.string.signup_incomplete_fields_message);
             builder.setTitle(R.string.error_title);
             builder.setPositiveButton(android.R.string.ok, null);
             AlertDialog dialog = builder.create();

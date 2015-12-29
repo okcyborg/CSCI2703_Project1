@@ -15,7 +15,8 @@
     <string name="email_hint">Email</string>
     <string name="sign_up_button_label">SIGN UP</string>string>
     <string name="cancel_button_label">CANCEL</string>
-    <string name="signup_error_message">Please make sure you enter a username, password, and email address</string>
+    <string name="signup_incomplete_fields_message">Please make sure you enter a username, password, and email address</string>
+    <string name="signup_auth_failed_message">Sorry but the email address you entered is incorrect.</string>
     <string name="password_error_message">Your passwords don\'t match</string>
     <string name="menu_logout_label">Logout</string>
     <string name="title_activity_edit_login_information">EditLoginInformation</string>

@@ -177,8 +177,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void recordHoldCompletion() {
         float duration = lengthOfTime * 60.0f;
-        float timeElapsed = performingCompletionSteps ? lengthOfTime * 60.0f : mCircleView.getTimeElapsed()/1000.0f;
+        float timeElapsed = performingCompletionSteps ? duration : mCircleView.getTimeElapsed()/1000.0f;
         final ParseObject holdEvent = new ParseObject(ParseConstants.CLASS_HOLD_EVENT);
+
+        if (new Float(timeElapsed).compareTo(duration) == 0 && ! performingCompletionSteps) {
+            timeElapsed -= 0.04f;
+        }
 
         holdEvent.put(ParseConstants.KEY_DURATION, duration);
         holdEvent.put(ParseConstants.KEY_USER_ID, mCurrentUser.getObjectId());

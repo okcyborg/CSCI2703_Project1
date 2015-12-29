@@ -7,6 +7,7 @@ public class ParseConstants {
     //Class names
     public static final String CLASS_HOLD_EVENT = "HoldEvent";
     public static final String CLASS_SURVEY_ANSWERS = "SurveyAnswers";
+    public static final String CLASS_USER_AUTHENTICATION = "UserAuthentication";
 
     //Field names
     public static final String KEY_USER_HOLD_EVENT = "UserHoldEvent";
