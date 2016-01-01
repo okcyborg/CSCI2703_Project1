@@ -33,11 +33,14 @@ public class PressHereApplication extends Application{
     }
 
     public static ParseUser getCurrentParseUser() {
-        ParseUser currentUser;
-        try {
-            currentUser = ParseUser.getCurrentUser().fetch();
-        } catch (ParseException e) {
-            currentUser = ParseUser.getCurrentUser();
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        if (currentUser != null) {
+            try {
+                currentUser = ParseUser.getCurrentUser().fetch();
+            } catch (ParseException e) {
+                currentUser = ParseUser.getCurrentUser();
+            }
         }
 
         return currentUser;
