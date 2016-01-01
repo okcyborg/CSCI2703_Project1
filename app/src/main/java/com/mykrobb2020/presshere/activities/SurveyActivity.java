@@ -29,6 +29,7 @@ import butterknife.InjectView;
 public class SurveyActivity extends AppCompatActivity {
 
     private int mStressLevel;
+    private ParseUser mCurrentUser;
     public static final String TAG = SurveyActivity.class.getSimpleName();
     @InjectView(R.id.progressBar) protected ProgressBar mProgressBar;
 
@@ -36,8 +37,20 @@ public class SurveyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
-
         ButterKnife.inject(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCurrentUser = PressHereApplication.getCurrentParseUser();
+        if (!mCurrentUser.getBoolean(ParseConstants.KEY_SURVEY_ELIGIBLE)) {
+            Intent intent = new Intent(this, MainActivity.class);
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -108,18 +121,17 @@ public class SurveyActivity extends AppCompatActivity {
             dialog.show();
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
-            final ParseUser currentUser = ParseUser.getCurrentUser();
             final ParseObject holdEvent = new ParseObject(ParseConstants.CLASS_SURVEY_ANSWERS);
             holdEvent.put(ParseConstants.KEY_STRESS_LEVEL, mStressLevel);
-            holdEvent.put(ParseConstants.KEY_USER_ID, currentUser.getObjectId());
+            holdEvent.put(ParseConstants.KEY_USER_ID, mCurrentUser.getObjectId());
             holdEvent.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                 mProgressBar.setVisibility(View.GONE);
                 if (e == null) {
-                    currentUser.put(ParseConstants.KEY_SURVEY_ELIGIBLE, false);
-                    currentUser.saveInBackground();
-                    if (currentUser.getBoolean(ParseConstants.KEY_CONTROL_USER)) {
+                    mCurrentUser.put(ParseConstants.KEY_SURVEY_ELIGIBLE, false);
+                    mCurrentUser.saveInBackground();
+                    if (mCurrentUser.getBoolean(ParseConstants.KEY_CONTROL_USER)) {
                         setContentView(R.layout.message_layout);
                         ((TextView)findViewById(R.id.messageTextView)).setText("Your survey has been submitted, nothing more to do");
                     } else {

@@ -5,6 +5,7 @@ import android.preference.PreferenceManager;
 
 import com.mykrobb2020.presshere.constants.ParseConstants;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -29,6 +30,17 @@ public class PressHereApplication extends Application{
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put(ParseConstants.KEY_USER_ID, user.getObjectId());
         installation.saveInBackground();
+    }
+
+    public static ParseUser getCurrentParseUser() {
+        ParseUser currentUser;
+        try {
+            currentUser = ParseUser.getCurrentUser().fetch();
+        } catch (ParseException e) {
+            currentUser = ParseUser.getCurrentUser();
+        }
+
+        return currentUser;
     }
 
 }

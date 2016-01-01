@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mykrobb2020.presshere.PressHereApplication;
 import com.mykrobb2020.presshere.constants.ParseConstants;
 import com.mykrobb2020.presshere.views.MyView;
 import com.mykrobb2020.presshere.R;
@@ -71,13 +72,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+    }
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCurrentUser = PressHereApplication.getCurrentParseUser();
+        if (mCurrentUser == null) {
             navigateToLogin();
-        } else if (currentUser.getBoolean(ParseConstants.KEY_SURVEY_ELIGIBLE)) {
+        } else if (mCurrentUser.getBoolean(ParseConstants.KEY_SURVEY_ELIGIBLE)) {
             navigateToSurvey();
-        } else if (currentUser.getBoolean(ParseConstants.KEY_CONTROL_USER)) {
+        } else if (mCurrentUser.getBoolean(ParseConstants.KEY_CONTROL_USER)) {
             setContentView(R.layout.message_layout);
             ((TextView)findViewById(R.id.messageTextView)).setText("Nothing to do at this point");
         }
@@ -92,12 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
         mCircleView.setLengthOfTime(lengthOfTime);
         mCircleView.setOnTouchListener(mOnTouchListener);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mCurrentUser = ParseUser.getCurrentUser();
     }
 
     @Override

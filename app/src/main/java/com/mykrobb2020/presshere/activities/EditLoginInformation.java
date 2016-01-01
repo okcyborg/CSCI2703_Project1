@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.mykrobb2020.presshere.PressHereApplication;
 import com.mykrobb2020.presshere.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -41,7 +42,7 @@ public class EditLoginInformation extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mCurrentUser = ParseUser.getCurrentUser();
+        mCurrentUser = PressHereApplication.getCurrentParseUser();
         mUserName.setText(mCurrentUser.getUsername());
         mEmail.setText(mCurrentUser.getEmail());
     }
