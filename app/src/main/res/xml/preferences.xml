@@ -11,6 +11,6 @@
     <Preference
         android:title="Account">
         <intent android:targetPackage="com.mykrobb2020.presshere"
-                android:targetClass="com.mykrobb2020.presshere.activities.EditLoginInformation"/>
+                android:targetClass="com.mykrobb2020.presshere.activities.AccountInformationActivity"/>
     </Preference>
 </PreferenceScreen>

@@ -7,7 +7,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:background="@color/account_background"
-                tools:context="com.mykrobb2020.presshere.activities.EditLoginInformation">
+                tools:context="com.mykrobb2020.presshere.activities.AccountInformationActivity">
 
     <LinearLayout
         android:id="@+id/editTextLayout"
@@ -20,8 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -29,56 +28,32 @@
                 android:text="Username"
                 android:textSize="13sp"/>
 
-            <EditText
-                android:id="@+id/usernameField"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                tools:text="user1"/>
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password"
-                android:textSize="13sp"/>
-
-            <EditText
-                    android:inputType="textPassword"
-                    android:id="@+id/passwordField"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/usernameTextView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
-                    android:hint="********"/>
+                    tools:text="user1"/>
+
+                <TextView
+                    android:id="@+id/editUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="50dp"
+                    android:textColor="@color/action_bar_background"
+                    android:text="edit"/>
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Re-enter password"
-                android:textSize="13sp"/>
-
-            <EditText
-                android:inputType="textPassword"
-                android:id="@+id/passwordReentryField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:hint="********"/>
-        </LinearLayout>
-
-        <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -90,26 +65,47 @@
                 android:textSize="13sp"/>
 
             <TextView
-                android:id="@+id/emailField"
-                android:layout_width="match_parent"
+                android:id="@+id/emailTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                tools:text="mykrobb@gmail.com"/>
-
+                tools:text="robb@gmail.com"/>
         </LinearLayout>
 
-        <Button
+        <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Make changes"
-            android:textColor="@android:color/white"
-            android:id="@+id/submitButton"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/color_button_custom"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="13sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:hint="**********"/>
+
+                <TextView
+                    android:id="@+id/editPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="50dp"
+                    android:textColor="@color/action_bar_background"
+                    android:text="edit"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:layout_width="match_parent"
@@ -120,21 +116,10 @@
             android:background="@drawable/button_custom"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"/>
-
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_marginTop="@dimen/login_vertical_margin"
-        android:paddingTop="@dimen/progress_vertical_padding"
-        android:layout_below="@id/title"
-        android:layout_centerHorizontal="true"
-        style="?android:attr/progressBarStyleLarge"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

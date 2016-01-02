@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.mykrobb2020.presshere.PressHereApplication;
 import com.mykrobb2020.presshere.R;
+import com.mykrobb2020.presshere.constants.ParseConstants;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -65,8 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     mProgressBar.setVisibility(View.GONE);
                     if (e == null) {
                         PressHereApplication.updateParseInstallation(parseUser);
-                        Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = parseUser.getBoolean(ParseConstants.KEY_READ_TUTORIAL) ? new Intent(LoginActivity.this, MainActivity.class) : new Intent(LoginActivity.this, WelcomeActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

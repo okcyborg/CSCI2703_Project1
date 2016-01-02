@@ -20,4 +20,5 @@ public class ParseConstants {
     public static final String KEY_SURVEY_ELIGIBLE = "surveyEligible";
     public static final String KEY_TIME_ELAPSED = "timeElapsed";
     public static final String KEY_HOLD_COMPLETED = "holdCompleted";
+    public static final String KEY_READ_TUTORIAL = "readTutorial";
 }

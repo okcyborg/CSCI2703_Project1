@@ -191,21 +191,9 @@ public class MainActivity extends AppCompatActivity {
         holdEvent.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if (e == null) {
-                    ParseRelation<ParseObject> userHoldEvent = mCurrentUser.getRelation(ParseConstants.KEY_USER_HOLD_EVENT);
-                    userHoldEvent.add(holdEvent);
-                    mCurrentUser.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e != null) {
-                                Log.e(TAG, "Unable to create UserHoldEvent");
-                            }
-                        }
-                    });
-
-                } else {
-                    Log.e(TAG, "Unable to create HoldEvent");
-                }
+            if (e != null) {
+                Log.e(TAG, "Unable to create HoldEvent");
+            }
             }
         });
     }

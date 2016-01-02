@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.mykrobb2020.presshere.R;
+import com.mykrobb2020.presshere.constants.ParseConstants;
+import com.parse.ParseUser;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,6 +30,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.continueText)
     public void continueToMain() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser.put(ParseConstants.KEY_READ_TUTORIAL, true);
+        currentUser.saveInBackground();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

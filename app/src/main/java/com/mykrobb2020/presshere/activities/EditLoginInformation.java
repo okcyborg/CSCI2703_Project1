@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.mykrobb2020.presshere.PressHereApplication;
 import com.mykrobb2020.presshere.R;
@@ -26,7 +27,7 @@ public class EditLoginInformation extends AppCompatActivity {
     @InjectView(R.id.usernameField) protected EditText mUserName;
     @InjectView(R.id.passwordField) protected EditText mPassword;
     @InjectView(R.id.passwordReentryField) protected EditText mPasswordReentry;
-    @InjectView(R.id.emailField) protected EditText mEmail;
+    @InjectView(R.id.emailField) protected TextView mEmail;
     @InjectView(R.id.progressBar) protected ProgressBar mProgressBar;
 
 
@@ -34,9 +35,7 @@ public class EditLoginInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_login_information);
-
         ButterKnife.inject(this);
-
     }
 
     @Override
@@ -52,9 +51,8 @@ public class EditLoginInformation extends AppCompatActivity {
         String username = mUserName.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
         String passwordReentry = mPasswordReentry.getText().toString().trim();
-        String email = mEmail.getText().toString().trim();
 
-        if (username.isEmpty() || (password.isEmpty() ^ passwordReentry.isEmpty()) || email.isEmpty()) {
+        if (username.isEmpty() || (password.isEmpty() ^ passwordReentry.isEmpty())) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.signup_incomplete_fields_message);
             builder.setTitle(R.string.error_title);
@@ -71,7 +69,6 @@ public class EditLoginInformation extends AppCompatActivity {
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
             mCurrentUser.setUsername(username);
-            mCurrentUser.setEmail(email);
             if (!password.isEmpty()) {
                 mCurrentUser.setPassword(password);
             }
